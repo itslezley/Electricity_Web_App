@@ -1,0 +1,41 @@
+body{
+
+    height: 590px;
+    overflow: hidden;
+}
+
+  main{
+
+    margin-top: 50px;
+    
+    width: 50%;
+     border: 2px solid gray;
+     border-radius: 20px;
+     
+     
+  }
+
+  #email{
+
+    border-radius: 10px;
+
+ width: 100%;
+  }
+  #mail{
+
+    border-radius: 15px;
+
+  }
+  button{
+
+    background-color: #2980b9;
+  }
+
+  .center {
+    text-align: center;
+    border: 3px solid gray;
+  }
+
+
+  
+  

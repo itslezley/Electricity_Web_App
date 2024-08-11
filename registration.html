@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+    <style>
+        /* Progress bar styles */
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .progress {
+            height: 100%;
+            border-radius: 5px;
+        }
+        #submitBtn[disabled] {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Style for password strength indicator */
+        #passwordStrength {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .weak {
+            color: #ff4d4d;
+        }
+
+        .medium {
+            color: #ffa500;
+        }
+
+        .strong {
+            color: #00ff00;
+        }
+    </style>
+
+
+</head>
+<body class="registrationBody">
+    <div class="center1">
+    
+    <h2>User Registration</h2>
+    
+    <form action="backend/registration.php" method="post">
+        
+        <div class="text">
+            <input type="text" id="name" name="name" required>
+            <span></span>
+            <label for="name">Name:</label>
+            </div>
+    
+            <div class="text">
+                <input type="text" id="surname" name="surname" required>
+                <span></span>
+                <label for="surname">Surname:</label>
+                </div>
+        
+                <div class="text">
+                    <input type="text" id="phone_number" name="phone_number" required>
+                    <span></span>
+                    <label for="phone_number">Phone Number:</label>
+                    </div>
+        
+                    <div class="text">
+                        <input type="text" id="meter_number" name="meter_number" required>
+                        <span></span>
+                        <label for="meter_number">Meter Number:</label>
+                        </div>
+
+        
+        <div class="text">
+            <input type="email" id="username" name="username" required>
+            <span></span>
+            <label for="username">Email:</label>
+        </div>
+    
+            <div class="text">
+           
+            <input type="text" id="Address" name="Address" required>
+            <span></span>
+            <label for="Address">Address:</label>
+            </div>
+
+            <div class="text">
+           
+                <input type="password" id="password" onkeydown="checkPasswordStrength(this.value)" name="password" required>
+                <span></span>
+                <label for="password">Password:</label>
+                <!-- Progress bar for password strength -->
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <!-- Password strength indicator -->
+                <div id="passwordStrength"></div>
+                </div>
+                <!-- Password requirements -->
+            <div class="text">
+                <div id="passwordRequirements" style="margin-top: 5px; font-size: 14px;">
+                    Password must contain:<br/> <strong>1.</strong>Atleast one uppercase letter <br/> <strong>2.</strong>Atleast one lowercase letter <br/> <strong>3.</strong> Atleast one number<br/> <strong>4.</strong>Atleast one special character <br/> <strong>5.</strong> 8 Characters Long
+                </div>
+            </div>
+    
+                <div class="radioButton">
+                    <input type="radio" value="Customer" name="userType" checked>Customer
+                    <input type="radio" value="Employee" name="userType">Employee
+                </div>
+        
+        
+            <input type="submit" name="submitBtn" id="submitBtn" value="Sign Up">
+    
+            <div class="signup_link">
+                Already have an account? <a href="index.php">Sign In</a>
+            </div>
+    
+    </form>
+    </div>      
+    <script>
+        
+        function checkPasswordStrength(password) {
+            var progressBar = document.getElementById('progress');
+            var strength = 1;
+            var colors = ['#ff4d4d','#ff4d4d', '#ffa500', '#00ff00'];
+            var passwordStrengthText = document.getElementById('passwordStrength');
+            
+            if (password.length != 8) {
+                strength = 1;
+                passwordStrengthText.innerText = "Password length must be 8 characters";
+                passwordStrengthText.className = "weak";
+            } else {
+                if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) {
+                    strength += 1;
+                }
+                if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) {
+                    strength += 1;
+                }
+                if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) {
+                    strength += 1;
+                }
+                if (strength === 1) {
+                    passwordStrengthText.innerText = "Weak password";
+                    passwordStrengthText.className = "weak";
+                } else if (strength === 2) {
+                    passwordStrengthText.innerText = "Medium password";
+                    passwordStrengthText.className = "medium";
+                } else {
+                    passwordStrengthText.innerText = "Strong password";
+                    passwordStrengthText.className = "strong";
+                }
+            }
+
+            progressBar.style.backgroundColor = colors[strength];
+            progressBar.style.width = (strength * 33.33) + '%';
+
+            var submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = (strength < 3);
+
+            
+        }
+    </script>
+</body>
+
+ 
+</html>
